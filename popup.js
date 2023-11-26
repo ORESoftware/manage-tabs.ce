@@ -2,15 +2,53 @@
 
 const myList = [
     '//wellsfargo.com',
+    '.wellsfargo.com',
+
     '//facebook.com',
     '.facebook.com',
+
     '//youtube.com',
+    '.youtube.com',
+
     '//chat.openai.com',
+    '.chat.openai.com',
+
     '//confluence.esteeonline.com',
+    '.confluence.esteeonline.com',
+
     '//jira.esteeonline.com',
+    '.jira.esteeonline.com',
+
     '//liveperson.com',
+    '.liveperson.com',
+
     '//liveperson.net',
-    '.liveperson.net'
+    '.liveperson.net',
+
+    '//boo.world',
+    '.boo.world',
+
+    '//match.com',
+    '.match.com',
+
+    '//maps.google.com',
+    '.maps.google.com',
+
+    '//translate.google.com',
+    '.translate.google.com',
+
+    '//docs.google.com',
+    '.docs.google.com',
+
+    '//mail.google.com',
+    '.mail.google.com',
+
+    '//calendar.google.com',
+    '.calendar.google.com',
+
+    '//stackoverflow.com',
+    '.stackoverflow.com',
+
 ];
 
 // Function to call with each value
