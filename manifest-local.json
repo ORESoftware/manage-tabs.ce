@@ -4,7 +4,8 @@
   "version": "1.0",
   "permissions": [
     "tabs",
-    "storage"
+    "storage",
+    "management"
   ],
   "host_permissions": ["*://*/*"],
   "background": {

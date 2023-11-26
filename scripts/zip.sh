@@ -7,8 +7,11 @@ zip -r builds/archive.zip "$PWD" \
     -x '*/builds/*' \
     -x '*/scripts/*' \
     -x '*/images/*' \
-    -x 'package.json' \
-    -x 'package-lock.json' \
-    -x 'puppeteer.js' \
-    -x 'main.js' \
-    -x 'close-tabs.js'
+    -x '*/package.json' \
+    -x '*/package-lock.json' \
+    -x '*/puppeteer.js' \
+    -x '*/.gitignore' \
+    -x '*/main.html' \
+    -x '*/main.js' \
+    -x '*/manifest-local.json' \
+    -x '*/close-tabs.js'
