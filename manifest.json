@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Closer",
+  "version": "1.0",
+  "permissions": [
+    "tabs"
+  ],
+  "host_permissions": ["*://*/*"],
+  "background": {
+    "service_worker": "background.js",
+    "persistent": true
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

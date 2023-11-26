@@ -1,0 +1,14 @@
+<!-- intermediary.html -->
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+    function sendMessageToExtension(message) {
+        const extensionId = 'ajijnhhpnpmnonlfhdlfobemomlkmnan';
+        chrome.runtime.sendMessage(extensionId, {message: message}, function(response) {
+            console.log("Response:", response);
+        });
+    }
+</script>
+</body>
+</html>

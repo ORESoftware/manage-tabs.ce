@@ -1,0 +1,15 @@
+{
+  "name": "chrome-kill-tabs",
+  "version": "0.1.1",
+  "description": "kill chrome tabs ",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo noop"
+  },
+  "author": "olegzandr",
+  "license": "SEE LICENSE IN license.md",
+  "dependencies": {
+    "chrome-remote-interface": "^0.33.0",
+    "puppeteer": "^21.5.2"
+  }
+}
