@@ -26,6 +26,30 @@ function processValue(value) {
     });
 }
 
+function sortTabs() {
+    chrome.tabs.query({}, function(tabs) {
+        // Sort tabs based on the stored opening time
+        tabs.sort((a, b) => tabsOpened[a.id] - tabsOpened[b.id]);
+
+        // Rearrange tabs
+        tabs.forEach((tab, index) => {
+            chrome.tabs.move(tab.id, { index: index });
+        });
+    });
+}
+
+function openOrFocusTab(url) {
+    chrome.tabs.query({}, function(tabs) {
+        var existingTab = tabs.find(tab => tab.url && tab.url.includes(url));
+        if (existingTab) {
+            chrome.tabs.update(existingTab.id, { selected: true });
+        } else {
+            chrome.tabs.create({ url: `https://${url}` });
+        }
+    });
+}
+
+
 // Counter to keep track of the current index
 let currentIndex = 0;
 

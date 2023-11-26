@@ -1,0 +1,2 @@
+The Tabs Closer chrome extension does not need a privacy policy as it does not collect any data.
+It only stores tab id's in sync storage. But the tab id doesn't really contain any particular information.

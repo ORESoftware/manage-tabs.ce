@@ -3,12 +3,13 @@
   "name": "Tab Closer",
   "version": "1.0",
   "permissions": [
-    "tabs"
+    "tabs",
+    "storage",
+    "management"
   ],
   "host_permissions": ["*://*/*"],
   "background": {
-    "service_worker": "background.js",
-    "persistent": true
+    "service_worker": "background.js"
   },
   "action": {
     "default_popup": "popup.html"
