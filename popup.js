@@ -49,7 +49,15 @@ const myList = [
     '//stackoverflow.com',
     '.stackoverflow.com',
 
+    '//github.com',
+    '.github.com',
+
 ];
+
+const notList = [
+    'stackoverflow.com/questions/ask'
+
+]
 
 // Function to call with each value
 function processValue(value) {
@@ -57,8 +65,13 @@ function processValue(value) {
     chrome.tabs.query({}, function (tabs) {
         tabs.forEach(tab => {
             console.log('tab.url', tab.url);
-            if (tab.url && tab.url.includes(value)) {
-                chrome.tabs.remove(tab.id);
+            if (tab.url && tab.url.match(value)) {
+                if(!notList.some(v => {
+                    return tab.url.match(v)
+                })){
+                    chrome.tabs.remove(tab.id);
+                }
+
             }
         });
     });

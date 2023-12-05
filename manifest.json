@@ -7,6 +7,29 @@
     "storage",
     "management"
   ],
+  "commands": {
+    "go-to-oldest-tab": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+O",
+        "mac": "Command+Shift+O"
+      },
+      "description": "Go to oldest tab"
+    },
+    "go-to-next-oldest-tab": {
+      "suggested_key": {
+        "default": "Ctrl+J",
+        "mac": "Command+J"
+      },
+      "description": "Go to next oldest tab"
+    },
+    "close-active-tab": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "Command+Shift+L"
+      },
+      "description": "Close the active tab"
+    }
+  },
   "host_permissions": ["*://*/*"],
   "background": {
     "service_worker": "background.js"
