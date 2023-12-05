@@ -37,17 +37,27 @@ chrome.commands.onCommand.addListener(function (command) {
       
       const item = sorted[count];
       
-      if (item && item[1]) {
-          console.log('item 1:',{item});
-          // chrome.windows.update(tab.windowId, { focused: true });
-          let id = item[1].id;
-          
-          if(typeof id === 'string'){
-              id = parseInt(id)
-          }
-          
-          chrome.tabs.update(id, {active: true}, onUpdate);
+      if (!(item && item[1])) {
+        console.error('missing item at index:', count)
+        return;
       }
+      
+      // chrome.windows.update(tab.windowId, { focused: true });
+      let id = item[1].id;
+      
+      if (typeof id === 'string') {
+        id = parseInt(id)
+      }
+      
+      chrome.tabs.get(id, (tab) => {
+        if (tab) {
+          chrome.tabs.update(id, {active: true}, onUpdate);
+        } else {
+          const tabs = JSON.parse(res.tabs || '{}')
+          delete tabs[id];
+          chrome.storage.sync.set({tabs: JSON.stringify(tabs)}, onSet);
+        }
+      });
       
     });
     return;
@@ -67,14 +77,22 @@ chrome.commands.onCommand.addListener(function (command) {
       const item = sorted[count];
       
       if (item && item[1]) {
-          
-          let id = item[1].id;
-          
-          if(typeof id === 'string'){
-              id = parseInt(id)
+        
+        let id = item[1].id;
+        
+        if (typeof id === 'string') {
+          id = parseInt(id)
+        }
+        
+        chrome.tabs.get(id, (tab) => {
+          if (tab) {
+            chrome.tabs.update(id, {active: true}, onUpdate);
+          } else {
+            const tabs = JSON.parse(res.tabs || '{}')
+            delete tabs[id];
+            chrome.storage.sync.set({tabs: JSON.stringify(tabs)}, onSet);
           }
-          
-        chrome.tabs.update(id, {active: true}, onUpdate);
+        });
       }
       
     });
@@ -98,7 +116,6 @@ chrome.tabs.onCreated.addListener(function (tab) {
   
   // chrome.storage.sync.set({[id]: tab.id})
 });
-
 
 
 chrome.tabs.onRemoved.addListener(function (tabId) {
@@ -130,6 +147,21 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 //     // You can use details.tabId here
 // });
 
+chrome.tabs.onActivated.addListener(function (activeInfo) {
+  // activeInfo.tabId will have the ID of the active tab
+  // activeInfo.windowId will have the ID of the window
+  const id = activeInfo.tabId;
+  chrome.storage.sync.get(['tabs'], res => {
+    const tabs = JSON.parse(res.tabs || '{}')
+    let t = tabs[id];
+    if (!t) {
+      t = tabs[id] = {id}
+    }
+    t.time = Date.now();
+    chrome.storage.sync.set({tabs: JSON.stringify(tabs)}, onSet);
+  });
+  
+});
 
 chrome.storage.onChanged.addListener(function (changes, namespace) {
   // for (var key in changes) {

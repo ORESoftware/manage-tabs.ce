@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 zip -r builds/archive.zip "$PWD" \
     -x '*/.git/*' \
     -x '*/node_modules/*' \
