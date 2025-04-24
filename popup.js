@@ -13,18 +13,6 @@ const myList = [
     '//chat.openai.com',
     '.chat.openai.com',
 
-    '//confluence.esteeonline.com',
-    '.confluence.esteeonline.com',
-
-    '//jira.esteeonline.com',
-    '.jira.esteeonline.com',
-
-    '//liveperson.com',
-    '.liveperson.com',
-
-    '//liveperson.net',
-    '.liveperson.net',
-
     '//boo.world',
     '.boo.world',
 
