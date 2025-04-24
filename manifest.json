@@ -9,6 +9,14 @@
     "activeTab"
   ],
   "commands": {
+
+    "next-most-recent-tab": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "Command+Shift+K"
+      },
+      "description": "Go to previous tab"
+    },
     "go-to-oldest-tab": {
       "suggested_key": {
         "default": "Ctrl+Shift+O",

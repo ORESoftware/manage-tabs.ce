@@ -93,10 +93,13 @@ function openOrFocusTab(url) {
 let currentIndex = 0;
 
 // Function to handle keydown events
-function handleKeyDown() {
+function handleKeyDown(skip) {
     // Call the function with the current value
-    processValue(myList[currentIndex]);
-
+    
+    if(!skip){
+        processValue(myList[currentIndex]);
+    }
+    
     // Increment the index, reset if it exceeds the list length
     currentIndex = (currentIndex + 1) % myList.length;
     document.getElementById('foo').innerText = myList[currentIndex];
@@ -108,6 +111,11 @@ document.getElementById('foo').innerText = myList[currentIndex];
 document.getElementById('startButton').addEventListener('click', event => {
     handleKeyDown();
 });
+document.getElementById('skipButton').addEventListener('click', event => {
+    handleKeyDown(true);
+});
+
+
 window.addEventListener('keydown', event => {
     if (event && event.key === 'Enter') {
         handleKeyDown();
