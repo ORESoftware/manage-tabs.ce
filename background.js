@@ -11,23 +11,57 @@ chrome.commands.onCommand.addListener(function (command) {
   
   if (command === "next-most-recent-tab") {
     // skipCount = Math.max(0, skipCount - 1)
+    console.log('got: next-most-recent-tab');
     
     return app.p = app.p.then(() => {
       return new Promise((resolve) => {
         
-        setTimeout(resolve, 5000);
-        app.skipCount = Math.max(0, app.skipCount - 1);
-        console.log('inside: "close active tab"');
+       
+        console.log('inside: go to oldest tab');
+        // setTimeout(resolve, 5000);
         
-        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-          if (tabs[0]) {
-            chrome.tabs.remove(tabs[0].id, resolve);
+        chrome.storage.sync.get(['tabs'], res => {
+          
+          const tabs = JSON.parse(res.tabs || {});
+          
+          const sorted = Object.entries(tabs).sort((a, b) => {
+            return b[1].time - a[1].time;
+          });
+          
+          const count = app.skipCount = Math.max(sorted.length - 1,app.skipCount + 1)
+          
+          const item = sorted[count];
+          
+          if (!(item && item[1])) {
+            console.error('missing item at index:', count)
+            resolve();
+            return;
           }
+          
+          // chrome.windows.update(tab.windowId, { focused: true });
+          let id = item[1].id;
+          
+          if (typeof id === 'string') {
+            id = parseInt(id)
+          }
+          
+          chrome.tabs.get(id, (tab) => {
+            if (tab) {
+              console.log('tab exists')
+              chrome.tabs.update(tab.id, {active: true}, resolve);
+            } else {
+              console.log('tab does not exist')
+              const tabs = JSON.parse(res.tabs || '{}')
+              delete tabs[id];
+              chrome.storage.sync.set({tabs: JSON.stringify(tabs)}, resolve);
+            }
+          });
+          
         });
-      });
-    }).then(() => {
-      console.log('resolved closing active-tab')
-    })
+      }).then(() => {
+        console.log('>>> go to previous tab')
+      })
+    });
     
   }
   
