@@ -5,3 +5,7 @@ node_modules
 .idea
 builds/*
 !builds/readme.md
+tmp
+temp
+tmp/worktrees
+temp/worktrees
